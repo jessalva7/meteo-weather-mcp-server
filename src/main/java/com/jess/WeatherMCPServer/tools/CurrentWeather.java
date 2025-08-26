@@ -9,15 +9,41 @@ import com.jess.WeatherMCPServer.service.MeteoWeatherFetcher;
 
 import java.io.IOException;
 
+/**
+ * MCP tool service for retrieving current weather conditions.
+ * 
+ * This service provides real-time weather data for specified geographic coordinates
+ * using the Open-Meteo weather API. It extracts current weather information from
+ * the full weather response and returns a simplified current weather object.
+ * 
+ * @author Jess
+ * @version 1.0
+ */
 @Service
 public class CurrentWeather {
 
     private final MeteoWeatherFetcher weatherService;
     
+    /**
+     * Constructs a CurrentWeather tool with the specified weather service.
+     * 
+     * @param weatherService the weather data fetching service
+     */
     public CurrentWeather(MeteoWeatherFetcher weatherService) {
         this.weatherService = weatherService;
     }
 
+    /**
+     * Retrieves current weather conditions for the specified coordinates.
+     * 
+     * This method fetches comprehensive weather data and extracts only the current
+     * weather information including temperature, wind speed, and timing details.
+     * 
+     * @param latitude the geographic latitude (-90 to 90)
+     * @param longitude the geographic longitude (-180 to 180)
+     * @return current weather response containing temperature, wind speed, and timing
+     * @throws RuntimeException if weather data cannot be retrieved due to network or API issues
+     */
     @Tool(
         name = "GetCurrentWeather",
         description = "Get current weather for specified coordinates"
